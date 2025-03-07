@@ -2,7 +2,7 @@ name: Daily Scrape
 
 on:
   schedule:
-    - cron: "15 15 * * *"
+    - cron: "0 0 * * *"
   push:
     paths:
       - .github/workflows/scrape.yml
