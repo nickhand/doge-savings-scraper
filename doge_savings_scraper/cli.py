@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import click
 
 from . import HOME_FOLDER
@@ -40,8 +42,11 @@ def run(debug=False, browser="firefox", log_freq=10, max_results=None):
     # Run the scraper
     data = scraper.scrape_data(log_freq=log_freq, max_results=max_results)
 
-    # Save
+    # Make sure output folder exists
     output_folder = HOME_FOLDER / ".." / "data"
     output_folder.mkdir(exist_ok=True)
-    output_file = output_folder / "doge_savings_cfpb.csv"
+
+    # Tag the file
+    tag = datetime.now().strftime("%Y-%m-%d__%H-%M-%S")
+    output_file = output_folder / f"doge_savings_cfpb_{tag}.csv"
     data.to_csv(output_file, index=False)
