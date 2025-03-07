@@ -3,7 +3,7 @@
 ## Install
 
 ```
-https://github.com/nickhand/doge-savings-scraper.git
+git clone https://github.com/nickhand/doge-savings-scraper.git
 cd doge-savings-scraper
 poetry install
 ```
