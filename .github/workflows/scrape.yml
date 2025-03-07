@@ -1,0 +1,41 @@
+name: Daily Scrape
+on:
+  schedule:
+    - cron: "15 15 * * *"
+  push:
+    paths:
+      - .github/workflows/scrape.yml
+
+jobs:
+  daily-scrape:
+    name: Daily Scrape
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: Run image
+        uses: abatilo/actions-poetry@v2.0.0
+        with:
+          poetry-version: "2.0.1"
+      - name: Install firefox
+        run: sudo apt-get install -y firefox-esr
+      - name: Run update
+        run: |
+          poetry install
+          git pull origin main
+          poetry run doge-savings-scraper run --browser firefox --log-freq 10
+      - name: Commit files
+        continue-on-error: true
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -a -m "Add daily scrape"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

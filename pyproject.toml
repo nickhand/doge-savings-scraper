@@ -1,0 +1,26 @@
+[project]
+name = "doge-savings-scraper"
+version = "0.1.0"
+description = "Scraping CFPB contracts from doge.gov/savings"
+authors = [{ name = "Nick Hand", email = "nicholas.adam.hand@gmail.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "selenium (>=4.29.0,<5.0.0)",
+    "click (>=8.1.8,<9.0.0)",
+    "jupyterlab (>=4.3.5,<5.0.0)",
+    "requests (>=2.32.3,<3.0.0)",
+    "loguru (>=0.7.3,<0.8.0)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "tryagain (>=1.0,<2.0)",
+    "importlib-metadata (>=8.6.1,<9.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+doge-savings-scraper = "doge_savings_scraper.cli:cli"
