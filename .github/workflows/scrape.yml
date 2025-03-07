@@ -1,5 +1,4 @@
 name: Daily Scrape
-
 on:
   schedule:
     - cron: "15 15 * * *"
